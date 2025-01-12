@@ -154,28 +154,6 @@
     
     <div class="divider"></div>
 
-    <!-- Appliances & Devices -->
-    <div class="section">
-        <h2>
-            <i class="fas fa-tv"></i> Appliances & Devices
-            <button class="toggle-btn" onclick="toggleSection(this)" aria-label="Toggle section">
-                <i class="fas fa-chevron-down"></i>
-            </button>
-        </h2>
-        <div class="section-content">
-            <ul>
-                <li><strong>Thermostat:</strong> Don’t Touch.</li>
-                <li><strong>Smart TV:</strong> YouTube TV, Hulu, Netflix, Disney, Prime Video.</li>
-                <li>
-                    <strong>Washer/Dryer:</strong> Use the AI Opti Wash & Dry Setting. Detergent is automatically dispensed. Clean filter before use.
-                    <a href="#lint-filter-cleaning" style="margin-left: 5px;">See Lint Filter Cleaning Instructions</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="divider"></div>
-
     <!-- Nespresso Coffee Preparation Guide -->
     <div class="section">
         <h2>
