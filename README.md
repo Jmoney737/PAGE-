@@ -50,6 +50,34 @@
         .weather-widget div strong {
             color: #A88C7D;
         }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            width: 70%;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #A88C7D;
+            color: #FFF;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover { background-color: #946b5d; }
+        .divider {
+            height: 1px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
         .section {
             background: linear-gradient(135deg, #FFF, #F7F2EE);
             border-radius: 10px;
@@ -96,11 +124,34 @@
         </div>
     </div>
 
-    <div class="search-bar"> 
-        <input type="text" id="search-input" placeholder="Search for a section..." aria-label="Search for a section"> 
-        <button onclick="searchSections()">Search</button> 
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search for a section..." aria-label="Search for a section">
+        <button onclick="searchSections()">Search</button>
     </div>
 
+    <div class="divider"></div>
+
+    <!-- Example Section -->
+    <div class="section" id="appliances">
+        <h2>
+            <i class="fas fa-tv"></i> Appliances & Devices
+            <button class="toggle-btn" onclick="toggleSection(this, 'appliances')" aria-label="Toggle section">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </h2>
+        <div class="section-content">
+            <ul>
+                <li><strong>Thermostat:</strong> Don’t Touch.</li>
+                <li><strong>Smart TV:</strong> YouTube TV, Hulu, Netflix, Disney, Prime Video.</li>
+                <li>
+                    <strong>Washer/Dryer:</strong> Use the AI Opti Wash & Dry Setting. Detergent is automatically dispensed. Clean filter before use.
+                    <a href="#lint-filter-cleaning" style="margin-left: 5px;">See Lint Filter Cleaning Instructions</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
     <div class="divider"></div>
 
     <!-- Appliances & Devices -->
@@ -383,4 +434,77 @@
             <h3>Gaming Supplies:</h3>
             <ul>
                 <li>Stacked board games: Monopoly Builder, Out of Line, 500-piece puzzles</li>
-                <
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Fetch weather data
+        async function fetchWeather() {
+            const apiKey = '7841816e864c04d9b862cb645522ca43';
+            const city = 'Denton';
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+            const weatherDataDiv = document.getElementById('weather-data');
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Weather data not found');
+                const data = await response.json();
+
+                weatherDataDiv.innerHTML = `
+                    <p><strong>City:</strong> ${data.name}</p>
+                    <p><strong>Temperature:</strong> ${data.main.temp} &deg;F</p>
+                    <p><strong>Weather:</strong> ${data.weather[0].description}</p>
+                    <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
+                    <p><strong>Wind Speed:</strong> ${data.wind.speed} mph</p>
+                `;
+            } catch (error) {
+                weatherDataDiv.innerHTML = `<p>Error fetching weather data: ${error.message}</p>`;
+            }
+        }
+
+        // Toggle section and save state to localStorage
+        function toggleSection(button, sectionId) {
+            const sectionContent = button.parentElement.nextElementSibling;
+            const isActive = sectionContent.classList.contains('active');
+
+            if (isActive) {
+                sectionContent.classList.remove('active');
+                localStorage.removeItem(sectionId);
+            } else {
+                sectionContent.classList.add('active');
+                localStorage.setItem(sectionId, 'true');
+            }
+        }
+
+        // Restore section states from localStorage
+        function restoreSectionStates() {
+            document.querySelectorAll('.section').forEach(section => {
+                const sectionId = section.id;
+                if (localStorage.getItem(sectionId)) {
+                    section.querySelector('.section-content').classList.add('active');
+                }
+            });
+        }
+
+        // Search functionality
+        function searchSections() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            document.querySelectorAll('.section').forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    section.style.display = '';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Fetch weather data on page load
+        window.onload = () => {
+            fetchWeather();
+            restoreSectionStates();
+        };
+    </script>
+</body>
+</html>
