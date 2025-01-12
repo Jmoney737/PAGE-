@@ -377,3 +377,19 @@
             </button>
         </h2>
         <div class="section-content">
+            <h3>Networking and Smart Devices:</h3>
+            <ul>
+                <li>TP-Link Deco Wi-Fi 7 BE10000 (mesh system boxes)</li>
+                <li>Circular Deco devices (part of the mesh system)</li>
+                <li>Wall-mounted networking hub/access point</li>
+                <li>Cables (Ethernet and power)</li>
+            </ul>
+            <h3>Large Electronics:</h3>
+            <ul>
+                <li>Projector or similar device (silver-gray with vents and cables)</li>
+            </ul>
+            <h3>Gaming Supplies:</h3>
+            <ul>
+                <li>Stacked board games: Monopoly Builder, Out of Line, 500-piece puzzles</li>
+                <li>Two gaming controllers (black and white)</li>
+                <li>Charging dock for controllers
