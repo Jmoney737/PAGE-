@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +13,7 @@
             background-color: #121212;
             color: white;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             transition: background-color 0.3s, color 0.3s;
@@ -23,6 +24,19 @@
             gap: 20px;
             width: 90%;
             max-width: 600px;
+        }
+        @media (max-width: 600px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            .tile {
+                padding: 20px;
+                min-height: 150px;
+            }
+            .button-group button {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
         }
         .tile {
             background-color: #1E1E1E;
@@ -71,80 +85,55 @@
             background-color: #f44336;
             color: white;
         }
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%; /* Position above the button */
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
     </style>
 </head>
 <body>
+    <h1>Routine Dashboard</h1>
+
+    <!-- Dashboard Tiles -->
     <div class="dashboard-container">
-        <!-- Kitchen Group Tile -->
+        <!-- NFC 1 - Living Room On -->
         <div class="tile">
-            <i class="fas fa-blender"></i>
-            <h3>Kitchen Group</h3>
+            <i class="fas fa-tv"></i>
+            <h3>NFC 1 - Living Room On</h3>
             <div class="button-group">
-                <div class="tooltip">
-                    <button class="button-on" onclick="triggerRoutine('https://example.com/kitchen-on')">On</button>
-                    <span class="tooltiptext">Turns on all kitchen lights, including AMFL Kitchen, Bar 1, Cabinet L, and more.</span>
-                </div>
-                <div class="tooltip">
-                    <button class="button-off" onclick="triggerRoutine('https://example.com/kitchen-off')">Off</button>
-                    <span class="tooltiptext">Turns off all kitchen lights, including AMFL Kitchen, Bar 1, Cabinet L, and more.</span>
-                </div>
+                <button class="button-on" onclick="triggerRoutine('https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php?trigger=43a345bd-7137-4efb-bcf3-d1138b11652f')">Activate</button>
             </div>
         </div>
 
-        <!-- Living Room Group Tile -->
+        <!-- NFC 2 - His closest On -->
         <div class="tile">
-            <i class="fas fa-couch"></i>
-            <h3>Living Room</h3>
+            <i class="fas fa-door-open"></i>
+            <h3>NFC 2 - His Closet On</h3>
             <div class="button-group">
-                <div class="tooltip">
-                    <button class="button-on" onclick="triggerRoutine('https://example.com/living-room-on')">On</button>
-                    <span class="tooltiptext">Turns on all living room devices, including FL Living Room, FR Living Room, and more.</span>
-                </div>
-                <div class="tooltip">
-                    <button class="button-off" onclick="triggerRoutine('https://example.com/living-room-off')">Off</button>
-                    <span class="tooltiptext">Turns off all living room devices, including FL Living Room, FR Living Room, and more.</span>
-                </div>
+                <button class="button-on" onclick="triggerRoutine('https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php?trigger=d05db4c2-a1c4-4bfa-a989-fc26dd0de7be')">Activate</button>
             </div>
         </div>
 
-        <!-- Office Group Tile -->
+        <!-- Arrive Home Night -->
         <div class="tile">
-            <i class="fas fa-chair"></i>
-            <h3>Office Group</h3>
+            <i class="fas fa-home"></i>
+            <h3>Arrive Home Night</h3>
             <div class="button-group">
-                <div class="tooltip">
-                    <button class="button-on" onclick="triggerRoutine('https://example.com/office-on')">On</button>
-                    <span class="tooltiptext">Turns on all office devices, including desk lamp, shelf lights, and fireplace.</span>
-                </div>
-                <div class="tooltip">
-                    <button class="button-off" onclick="triggerRoutine('https://example.com/office-off')">Off</button>
-                    <span class="tooltiptext">Turns off all office devices, including desk lamp, shelf lights, and fireplace.</span>
-                </div>
+                <button class="button-on" onclick="triggerRoutine('https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php?trigger=0f437d3f-f6bb-45f4-8713-1807151995a2')">Activate</button>
+            </div>
+        </div>
+
+        <!-- NFC 4 - Master Bedroom Lamps -->
+        <div class="tile">
+            <i class="fas fa-bed"></i>
+            <h3>NFC 4 - Master Bedroom Lamps</h3>
+            <div class="button-group">
+                <button class="button-on" onclick="triggerRoutine('https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php?trigger=62dcc403-75b7-4a9c-8d7d-544c4ac0a6ea')">Activate</button>
+            </div>
+        </div>
+
+        <!-- NFC 5 - Living Room Off -->
+        <div class="tile">
+            <i class="fas fa-power-off"></i>
+            <h3>NFC 5 - Living Room Off</h3>
+            <div class="button-group">
+                <button class="button-off" onclick="triggerRoutine('https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php?trigger=63d016f8-0113-482d-967b-25bc5c79865d')">Deactivate</button>
             </div>
         </div>
     </div>
@@ -157,7 +146,7 @@
                     if (response.ok) {
                         alert("Routine triggered successfully!");
                     } else {
-                        alert("Failed to trigger routine.");
+                        alert("Failed to trigger routine. Status: " + response.status);
                     }
                 })
                 .catch(() => {
